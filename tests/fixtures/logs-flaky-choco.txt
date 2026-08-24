@@ -1,0 +1,22 @@
+2024-03-15T09:00:01.1234567Z ##[group]Run scripts/run_quality_gate.ps1
+2024-03-15T09:00:01.2345678Z ##[command]pwsh -NonInteractive -File scripts/run_quality_gate.ps1
+2024-03-15T09:00:02.0000000Z [Setup] ============================================================
+2024-03-15T09:00:02.0100000Z [Setup] Quality Gate Pipeline — gatetesting2
+2024-03-15T09:00:02.0200000Z [Setup] ============================================================
+2024-03-15T09:00:02.5000000Z [Setup] Installing Chocolatey dependencies...
+2024-03-15T09:00:03.6000000Z [Setup] chocolatey v2.2.2
+2024-03-15T09:00:03.7000000Z [Setup] Installing pandoc 3.1.11...
+2024-03-15T09:00:04.8000000Z [Setup] Downloading pandoc https://github.com/jgm/pandoc/releases/download/3.1.11/pandoc-3.1.11-windows-x86_64.zip
+2024-03-15T09:00:04.9000000Z [Setup]   Progress: Downloading pandoc 3.1.11... 0%
+2024-03-15T09:00:34.9000000Z [Setup]   Progress: Downloading pandoc 3.1.11... 12%
+2024-03-15T09:01:04.9000000Z [Setup]   Progress: Downloading pandoc 3.1.11... 24%
+2024-03-15T09:02:05.0000000Z ##[error]chocolatey install pandoc timed out after 120 seconds. The connection timed out waiting for a response from the server.
+2024-03-15T09:02:05.1000000Z ##[error]chocolatey: HTTP error 408 fetching https://packages.chocolatey.org/pandoc.3.1.11.nupkg
+2024-03-15T09:02:05.2000000Z [Setup] Retrying chocolatey install (attempt 2/3)...
+2024-03-15T09:03:06.3000000Z ##[error]chocolatey install pandoc timed out after 120 seconds. Connection timed out.
+2024-03-15T09:03:06.4000000Z [Setup] Retrying chocolatey install (attempt 3/3)...
+2024-03-15T09:04:07.5000000Z ##[error]chocolatey install pandoc timed out after 120 seconds. All retries exhausted.
+2024-03-15T09:04:07.6000000Z ##[error]SETUP FAILED: Could not install required Chocolatey packages after 3 attempts.
+2024-03-15T09:04:07.7000000Z [Gate] gate_decision: CHANGES_REQUIRED
+2024-03-15T09:04:07.8000000Z ##[endgroup]
+2024-03-15T09:04:07.9000000Z ##[error]Process completed with exit code 1.
