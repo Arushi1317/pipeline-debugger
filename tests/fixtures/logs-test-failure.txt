@@ -1,0 +1,42 @@
+2024-03-15T09:00:01.1234567Z ##[group]Run scripts/run_quality_gate.ps1
+2024-03-15T09:00:01.2345678Z ##[command]pwsh -NonInteractive -File scripts/run_quality_gate.ps1
+2024-03-15T09:00:02.0000000Z [Setup] ============================================================
+2024-03-15T09:00:02.0100000Z [Setup] Quality Gate Pipeline — gatetesting2
+2024-03-15T09:00:02.0200000Z [Setup] ============================================================
+2024-03-15T09:00:02.5000000Z [Setup] Installing Chocolatey dependencies...
+2024-03-15T09:00:19.1234567Z [Setup] dotnet-sdk 8.0.101 installed successfully.
+2024-03-15T09:00:19.5000000Z [Build] ============================================================
+2024-03-15T09:00:19.6000000Z [Build] Running MSBuild...
+2024-03-15T09:00:33.7654321Z [Build] Build succeeded.
+2024-03-15T09:00:33.8765432Z [Build]     0 Warning(s)
+2024-03-15T09:00:33.9876543Z [Build]     0 Error(s)
+2024-03-15T09:00:34.0000000Z [Test] ============================================================
+2024-03-15T09:00:34.1000000Z [Test] Running dotnet test --results-directory status --logger trx...
+2024-03-15T09:00:36.2345678Z [Test] Test run for QualityGate.Tests.dll (.NETCoreApp,Version=v8.0)
+2024-03-15T09:00:36.3456789Z [Test] Microsoft (R) Test Execution Command Line Tool Version 17.8.0
+2024-03-15T09:00:36.4567890Z [Test] Copyright (c) Microsoft Corporation.  All rights reserved.
+2024-03-15T09:00:36.5678901Z [Test]
+2024-03-15T09:00:37.6789012Z [Test] Starting test execution, please wait...
+2024-03-15T09:00:38.7890123Z [Test]   A total of 1 test files matched the specified pattern.
+2024-03-15T09:00:42.8901234Z [Test]
+2024-03-15T09:00:42.9012345Z [Test]   Failed  QualityGate.Tests.MetricsCollectorTests.Collect_WhenThresholdExceeded_ShouldReturnFail [142 ms]
+2024-03-15T09:00:43.0123456Z [Test]   Error Message:
+2024-03-15T09:00:43.1234567Z [Test]    Assert.AreEqual failed. Expected:<APPROVED_FOR_MERGE>. Actual:<CHANGES_REQUIRED>.
+2024-03-15T09:00:43.2345678Z [Test]   Stack Trace:
+2024-03-15T09:00:43.3456789Z [Test]      at QualityGate.Tests.MetricsCollectorTests.Collect_WhenThresholdExceeded_ShouldReturnFail() in C:\agent\work\1\s\tests\MetricsCollectorTests.cs:line 87
+2024-03-15T09:00:43.4567890Z [Test]
+2024-03-15T09:00:43.5678901Z [Test]   Failed  QualityGate.Tests.EvidenceBuilderTests.Build_WhenCoverageBelow80_ShouldFlag [89 ms]
+2024-03-15T09:00:43.6789012Z [Test]   Error Message:
+2024-03-15T09:00:43.7890123Z [Test]    Assert.IsTrue failed.
+2024-03-15T09:00:43.8901234Z [Test]   Stack Trace:
+2024-03-15T09:00:43.9012345Z [Test]      at QualityGate.Tests.EvidenceBuilderTests.Build_WhenCoverageBelow80_ShouldFlag() in C:\agent\work\1\s\tests\EvidenceBuilderTests.cs:line 54
+2024-03-15T09:00:44.0123456Z [Test]
+2024-03-15T09:00:44.1234567Z [Test] Results File: C:\agent\work\1\s\status\TestResults_20240315_090044.trx
+2024-03-15T09:00:44.2345678Z [Test]
+2024-03-15T09:00:44.3456789Z [Test] Test Run Failed.
+2024-03-15T09:00:44.4567890Z [Test]   Failed:     2, Passed:    40, Skipped:     0, Total:    42, Duration: 8s
+2024-03-15T09:00:44.5678901Z [Test] failed TestResults_20240315_090044.trx
+2024-03-15T09:00:44.6789012Z ##[error]dotnet test exited with code 1.
+2024-03-15T09:00:44.7890123Z [Gate] gate_decision: CHANGES_REQUIRED
+2024-03-15T09:00:44.8901234Z ##[endgroup]
+2024-03-15T09:00:44.9012345Z ##[error]Process completed with exit code 1.
