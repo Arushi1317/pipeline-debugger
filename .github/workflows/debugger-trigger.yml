@@ -1,0 +1,42 @@
+name: Pipeline Failure Debugger
+
+on:
+  repository_dispatch:
+    types: [debug-requested]
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: write
+
+jobs:
+  debug:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout debugger repo
+        uses: actions/checkout@v4
+
+      - name: Restore debugger memory cache
+        uses: actions/cache@v4
+        with:
+          path: .debugger-memory
+          key: debugger-memory-${{ github.event.client_payload.ref }}
+          restore-keys: |
+            debugger-memory-
+
+      - name: Run Pipeline Failure Debugger
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_RUN_ID: ${{ github.event.client_payload.run_id }}
+          TARGET_REPO: ${{ github.event.client_payload.repo }}
+          PR_NUMBER: ${{ github.event.client_payload.pr_number }}
+          GATE_DECISION: ${{ github.event.client_payload.decision }}
+          TARGET_REF: ${{ github.event.client_payload.ref }}
+        run: pwsh -File scripts/debugger/run_debugger.ps1
+
+      - name: Save debugger memory cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .debugger-memory
+          key: debugger-memory-${{ github.event.client_payload.ref }}
