@@ -1,0 +1,85 @@
+name: Debugger Accuracy Tests
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  accuracy-tests:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run analyze_failure accuracy tests
+        id: analyze
+        run: |
+          $output = pwsh -File tests/accuracy/test_analyze_failure.ps1 2>&1
+          Write-Host $output
+          $scoreLine = ($output | Select-String 'SCORE:\d+' | Select-Object -Last 1).Matches[0].Value
+          $score = if ($scoreLine) { [int]($scoreLine -replace 'SCORE:', '') } else { 0 }
+          "analyze_score=$score" | Out-File $env:GITHUB_OUTPUT -Append
+          if ($score -lt 85) { exit 1 }
+        continue-on-error: true
+
+      - name: Run check_changed_files accuracy tests
+        id: changed_files
+        run: |
+          $output = pwsh -File tests/accuracy/test_changed_files.ps1 2>&1
+          Write-Host $output
+          $scoreLine = ($output | Select-String 'SCORE:\d+' | Select-Object -Last 1).Matches[0].Value
+          $score = if ($scoreLine) { [int]($scoreLine -replace 'SCORE:', '') } else { 0 }
+          "changed_score=$score" | Out-File $env:GITHUB_OUTPUT -Append
+          if ($score -lt 85) { exit 1 }
+        continue-on-error: true
+
+      - name: Run memory_store accuracy tests
+        id: memory
+        run: |
+          $output = pwsh -File tests/accuracy/test_memory_store.ps1 2>&1
+          Write-Host $output
+          $scoreLine = ($output | Select-String 'SCORE:\d+' | Select-Object -Last 1).Matches[0].Value
+          $score = if ($scoreLine) { [int]($scoreLine -replace 'SCORE:', '') } else { 0 }
+          "memory_score=$score" | Out-File $env:GITHUB_OUTPUT -Append
+          if ($score -lt 85) { exit 1 }
+        continue-on-error: true
+
+      - name: Evaluate overall accuracy and post summary
+        env:
+          ANALYZE_SCORE: ${{ steps.analyze.outputs.analyze_score }}
+          CHANGED_SCORE: ${{ steps.changed_files.outputs.changed_score }}
+          MEMORY_SCORE: ${{ steps.memory.outputs.memory_score }}
+        run: |
+          $analyzeScore  = [int]($env:ANALYZE_SCORE  -replace '[^0-9]', '0')
+          $changedScore  = [int]($env:CHANGED_SCORE  -replace '[^0-9]', '0')
+          $memoryScore   = [int]($env:MEMORY_SCORE   -replace '[^0-9]', '0')
+
+          $overall = [math]::Round(($analyzeScore + $changedScore + $memoryScore) / 3)
+
+          $analyzeResult  = if ($analyzeScore  -ge 85) { '✅ PASS' } else { '❌ FAIL' }
+          $changedResult  = if ($changedScore  -ge 85) { '✅ PASS' } else { '❌ FAIL' }
+          $memoryResult   = if ($memoryScore   -ge 85) { '✅ PASS' } else { '❌ FAIL' }
+          $overallResult  = if ($overall       -ge 85) { '✅ PASS' } else { '❌ FAIL' }
+
+          $summary = @"
+          ## Accuracy Test Results
+
+          | Test Suite | Score | Result |
+          |---|---|---|
+          | analyze_failure | $analyzeScore% | $analyzeResult |
+          | check_changed_files | $changedScore% | $changedResult |
+          | memory_store | $memoryScore% | $memoryResult |
+          | **Overall** | **$overall%** | **$overallResult** |
+          "@
+
+          Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value $summary
+
+          if ($overall -lt 85) {
+            Write-Error "Overall accuracy $overall% is below the required 85% threshold."
+            exit 1
+          }
+          Write-Host "Overall accuracy: $overall% — threshold met."
