@@ -1,0 +1,36 @@
+2024-03-15T09:00:01.1234567Z ##[group]Run scripts/run_quality_gate.ps1
+2024-03-15T09:00:01.2345678Z ##[command]pwsh -NonInteractive -File scripts/run_quality_gate.ps1
+2024-03-15T09:00:02.0000000Z [Setup] ============================================================
+2024-03-15T09:00:02.0100000Z [Setup] Quality Gate Pipeline — gatetesting2
+2024-03-15T09:00:02.0200000Z [Setup] ============================================================
+2024-03-15T09:00:02.5000000Z [Setup] Installing Chocolatey dependencies...
+2024-03-15T09:00:18.1234567Z [Setup] dotnet-sdk 8.0.101 installed successfully.
+2024-03-15T09:00:18.5000000Z [Build] ============================================================
+2024-03-15T09:00:18.6000000Z [Build] Running MSBuild on QualityGate.sln...
+2024-03-15T09:00:22.7654321Z [Build] Microsoft (R) Build Engine version 17.8.3+195e7f5a3 for .NET
+2024-03-15T09:00:22.8765432Z [Build] Copyright (C) Microsoft Corporation. All rights reserved.
+2024-03-15T09:00:23.9876543Z [Build]
+2024-03-15T09:00:24.0987654Z [Build] Build started 15/03/2024 09:00:24.
+2024-03-15T09:00:24.2098765Z [Build] Project "C:\agent\work\1\s\QualityGate.sln" on node 1 (Restore target(s)).
+2024-03-15T09:00:25.3209876Z [Build]   Determining projects to restore...
+2024-03-15T09:00:26.4320987Z [Build]   Restored C:\agent\work\1\s\src\QualityGate.Core\QualityGate.Core.csproj (in 892 ms).
+2024-03-15T09:00:27.5432098Z [Build]   Restored C:\agent\work\1\s\src\QualityGate.Runner\QualityGate.Runner.csproj (in 1.1 s).
+2024-03-15T09:00:28.6543209Z [Build] Project "C:\agent\work\1\s\src\QualityGate.Core\QualityGate.Core.csproj" on node 1 (Build target(s)).
+2024-03-15T09:00:28.7654320Z [Build]   MetricsCollector.cs(47,19): error CS0103: The name 'GateDecision' does not exist in the current context [C:\agent\work\1\s\src\QualityGate.Core\QualityGate.Core.csproj]
+2024-03-15T09:00:28.8765431Z [Build]   MetricsCollector.cs(52,13): error CS0246: The type or namespace name 'EvidenceRecord' could not be found (are you missing a using directive or an assembly reference?) [C:\agent\work\1\s\src\QualityGate.Core\QualityGate.Core.csproj]
+2024-03-15T09:00:28.9876542Z MSBUILD : error MSB1011: Specify which project or solution file to use because this folder contains more than one project file.
+2024-03-15T09:00:29.0987653Z [Build] Build FAILED.
+2024-03-15T09:00:29.1098764Z [Build]
+2024-03-15T09:00:29.2209875Z [Build] Error(s)
+2024-03-15T09:00:29.3320986Z [Build]   C:\agent\work\1\s\src\QualityGate.Core\QualityGate.Core.csproj : error CS0103 - The name 'GateDecision' does not exist in the current context
+2024-03-15T09:00:29.4432097Z [Build]   C:\agent\work\1\s\src\QualityGate.Core\QualityGate.Core.csproj : error CS0246 - The type or namespace name 'EvidenceRecord' could not be found
+2024-03-15T09:00:29.5543208Z [Build]
+2024-03-15T09:00:29.6654319Z [Build]     2 Error(s)
+2024-03-15T09:00:29.7765430Z [Build]
+2024-03-15T09:00:29.8876541Z [Build] Time Elapsed 00:00:07.23
+2024-03-15T09:00:30.0000000Z [Test] Skipping test phase — build did not succeed.
+2024-03-15T09:00:30.1000000Z [Test] No test result files were found matching the pattern status/*.trx
+2024-03-15T09:00:30.2000000Z ##[error]MSBuild exited with code 1.
+2024-03-15T09:00:30.3000000Z [Gate] gate_decision: CHANGES_REQUIRED
+2024-03-15T09:00:30.4000000Z ##[endgroup]
+2024-03-15T09:00:30.5000000Z ##[error]Process completed with exit code 1.
