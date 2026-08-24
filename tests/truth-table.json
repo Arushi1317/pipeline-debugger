@@ -1,0 +1,122 @@
+[
+  {
+    "id": "tc-01",
+    "name": "pandoc not found — no changed files",
+    "fixtureLog": "logs-pandoc-missing.txt",
+    "changedFiles": [],
+    "expectedSeverity": "PIPELINE",
+    "expectedCategory": "tool-missing",
+    "expectedPhase": "PIPELINE",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "pandoc"
+  },
+  {
+    "id": "tc-02",
+    "name": "pandoc not found — workflow yml changed (infra correlation)",
+    "fixtureLog": "logs-pandoc-missing.txt",
+    "changedFiles": [".github/workflows/company-quality-gate.yml"],
+    "expectedSeverity": "PIPELINE",
+    "expectedCategory": "tool-missing",
+    "expectedPhase": "PIPELINE",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "pandoc"
+  },
+  {
+    "id": "tc-03",
+    "name": "test failure — no changed files",
+    "fixtureLog": "logs-test-failure.txt",
+    "changedFiles": [],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "test-failure",
+    "expectedPhase": "TEST",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "dotnet test"
+  },
+  {
+    "id": "tc-04",
+    "name": "test failure — test source code changed (code correlation)",
+    "fixtureLog": "logs-test-failure.txt",
+    "changedFiles": ["tests/MetricsCollectorTests.cs"],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "test-failure",
+    "expectedPhase": "TEST",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "dotnet test"
+  },
+  {
+    "id": "tc-05",
+    "name": "build error — MEDIUM confidence (build error + no test results both match)",
+    "fixtureLog": "logs-build-error.txt",
+    "changedFiles": [],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "build-error",
+    "expectedPhase": "BUILD",
+    "expectedConfidence": "MEDIUM",
+    "shouldPostComment": true,
+    "fixShouldMention": "MSBuild"
+  },
+  {
+    "id": "tc-06",
+    "name": "build error — csproj changed (code correlation)",
+    "fixtureLog": "logs-build-error.txt",
+    "changedFiles": ["src/QualityGate.Core/QualityGate.Core.csproj"],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "build-error",
+    "expectedPhase": "BUILD",
+    "expectedConfidence": "MEDIUM",
+    "shouldPostComment": true,
+    "fixShouldMention": "MSBuild"
+  },
+  {
+    "id": "tc-07",
+    "name": "build error — Program.cs changed (entrypoint correlation)",
+    "fixtureLog": "logs-build-error.txt",
+    "changedFiles": ["src/QualityGate.Runner/Program.cs"],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "build-error",
+    "expectedPhase": "BUILD",
+    "expectedConfidence": "MEDIUM",
+    "shouldPostComment": true,
+    "fixShouldMention": "MSBuild"
+  },
+  {
+    "id": "tc-08",
+    "name": "flaky Chocolatey timeout — no changed files",
+    "fixtureLog": "logs-flaky-choco.txt",
+    "changedFiles": [],
+    "expectedSeverity": "FLAKY",
+    "expectedCategory": "infra",
+    "expectedPhase": "PIPELINE",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "re-run"
+  },
+  {
+    "id": "tc-09",
+    "name": "flaky Chocolatey timeout — config changed (infra correlation)",
+    "fixtureLog": "logs-flaky-choco.txt",
+    "changedFiles": ["config/quality-gate.prod.json"],
+    "expectedSeverity": "FLAKY",
+    "expectedCategory": "infra",
+    "expectedPhase": "PIPELINE",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "re-run"
+  },
+  {
+    "id": "tc-10",
+    "name": "clean pass — no failures — silent (NONE confidence)",
+    "fixtureLog": "logs-clean-pass.txt",
+    "changedFiles": [],
+    "expectedSeverity": null,
+    "expectedCategory": null,
+    "expectedPhase": null,
+    "expectedConfidence": "NONE",
+    "shouldPostComment": false,
+    "fixShouldMention": null
+  }
+]
