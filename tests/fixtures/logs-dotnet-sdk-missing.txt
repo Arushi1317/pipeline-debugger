@@ -1,0 +1,13 @@
+2024-03-15T09:00:01.0000000Z [Setup] ============================================================
+2024-03-15T09:00:01.1000000Z [Setup] Quality Gate Pipeline — gatetesting2
+2024-03-15T09:00:01.2000000Z [Setup] ============================================================
+2024-03-15T09:00:01.5000000Z [Setup] Verifying dotnet SDK installation...
+2024-03-15T09:00:02.0000000Z [Setup] Checking global.json for required SDK version...
+2024-03-15T09:00:02.1000000Z [Setup] global.json specifies SDK version 9.0.200
+2024-03-15T09:00:02.5000000Z [Setup] Running: dotnet --version
+2024-03-15T09:00:02.8000000Z ##[error]A compatible .NET SDK was not found.
+2024-03-15T09:00:02.9000000Z ##[error]SDK 9.0.200 not found on the current runner. Installed versions: 8.0.101
+2024-03-15T09:00:03.0000000Z ##[error]Specify a matching dotnet-version in your workflow's setup-dotnet step.
+2024-03-15T09:00:03.1000000Z [Gate] gate_decision: CHANGES_REQUIRED
+2024-03-15T09:00:03.2000000Z ##[endgroup]
+2024-03-15T09:00:03.3000000Z ##[error]Process completed with exit code 1.
