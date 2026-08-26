@@ -76,6 +76,13 @@ $severityBadge = switch ($Analysis.Severity) {
     default    { '⚪ UNKNOWN' }
 }
 
+$stackLabel = switch ($Analysis.Language) {
+    'dotnet'  { '.NET' }
+    'python'  { 'Python' }
+    'mixed'   { '.NET + Python' }
+    default   { 'Unknown' }
+}
+
 $body = @"
 ## 🔍 Pipeline Failure Debugger — $confidenceBadge
 
@@ -86,6 +93,7 @@ $body = @"
 | Severity | $severityBadge |
 | Phase    | ``$($Analysis.Phase)`` |
 | Category | ``$($Analysis.Category)`` |
+| Stack    | $stackLabel |
 
 ### Raw Evidence
 ``````
@@ -100,11 +108,24 @@ if ($Analysis.Confidence -eq 'LOW') {
 
 "@
 } else {
-    $body += @"
+    $fix = $Analysis.SuggestedFix
+    if ($null -ne $fix -and $null -ne $fix.ImmediateFix) {
+        $body += @"
 ### Suggested Fix
-$($Analysis.SuggestedFix)
+| | |
+|---|---|
+| **Immediate** | $($fix.ImmediateFix) |
+| **Permanent** | $($fix.PermanentFix) |
+| **Docs** | $($fix.DocsLink) |
 
 "@
+    } else {
+        $body += @"
+### Suggested Fix
+$fix
+
+"@
+    }
 }
 
 $body += @"
