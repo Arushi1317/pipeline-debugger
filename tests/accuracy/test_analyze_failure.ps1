@@ -2,14 +2,17 @@
 .SYNOPSIS
     Accuracy test suite for analyze_failure.ps1.
     Loads each truth-table case, feeds the fixture log into analyze_failure,
-    compares the result to expected values, and scores out of 100 per case.
+    compares the result to expected values, and scores up to 105 pts per case.
 
     Scoring per case:
-      Severity correct   = 30 pts
-      Category correct   = 25 pts
-      Phase correct      = 20 pts
-      Confidence correct = 15 pts
-      shouldPostComment  = 10 pts
+      Severity correct       = 30 pts
+      Category correct       = 25 pts
+      Phase correct          = 20 pts
+      Confidence correct     = 15 pts
+      shouldPostComment      = 10 pts
+      Language correct       =  5 pts  (bonus)
+                               ─────
+      Maximum per case       = 105 pts
 
     Exits with code 1 if overall accuracy < 85%.
     Prints "SCORE:<n>" as the final line so the CI workflow can capture it.
@@ -71,11 +74,12 @@ foreach ($case in $truthTable) {
         $result = [PSCustomObject]@{
             Severity = $null; Category = $null; Phase = $null
             Confidence = 'NONE'; RawEvidence = $null; SuggestedFix = $null
+            Language = 'unknown'
         }
     }
 
     # Score this case
-    $casePossible = 100
+    $casePossible = 105
     $caseEarned   = 0
     $breakdown    = @()
 
@@ -104,6 +108,11 @@ foreach ($case in $truthTable) {
     $postCorrect      = ($wouldPost -eq [bool]$case.shouldPostComment)
     if ($postCorrect) { $caseEarned += 10; $breakdown += 'PostComment=OK(10)' }
     else              { $breakdown += "PostComment=FAIL(0) got=$wouldPost want=$($case.shouldPostComment)" }
+
+    # Language (5 bonus pts)
+    $langCorrect = ($result.Language -eq $case.expectedLanguage)
+    if ($langCorrect) { $caseEarned += 5; $breakdown += 'Language=OK(5)' }
+    else              { $breakdown += "Language=FAIL(0) got='$($result.Language)' want='$($case.expectedLanguage)'" }
 
     $totalPoints  += $casePossible
     $earnedPoints += $caseEarned
