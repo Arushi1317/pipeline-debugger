@@ -1,0 +1,19 @@
+2024-03-15T09:01:00.0000000Z [Test] ============================================================
+2024-03-15T09:01:00.1000000Z [Test] Running dotnet test QualityGate.Tests.csproj...
+2024-03-15T09:01:00.5000000Z [Test] Microsoft (R) Test Execution Command Line Tool Version 17.8.0
+2024-03-15T09:01:00.6000000Z [Test] Copyright (c) Microsoft Corporation. All rights reserved.
+2024-03-15T09:01:01.0000000Z [Test] Starting test execution, please wait...
+2024-03-15T09:01:01.5000000Z [Test]   A total of 1 test files matched the specified pattern.
+2024-03-15T09:01:04.2000000Z [Test]
+2024-03-15T09:01:04.3000000Z [Test]   Failed  AnalysisServiceTests.Analyse_WhenReportIsNull_ShouldThrow [23 ms]
+2024-03-15T09:01:04.4000000Z [Test]   Error Message:
+2024-03-15T09:01:04.5000000Z [Test]    System.NullReferenceException: Object reference not set to an instance of an object.
+2024-03-15T09:01:04.6000000Z [Test]   Stack Trace:
+2024-03-15T09:01:04.7000000Z [Test]      at QualityGate.Core.AnalysisService.Analyse(EvidenceReport report) in C:\agent\work\1\s\src\QualityGate.Core\AnalysisService.cs:line 34
+2024-03-15T09:01:04.8000000Z [Test]      at QualityGate.Tests.AnalysisServiceTests.Analyse_WhenReportIsNull_ShouldThrow() in C:\agent\work\1\s\tests\AnalysisServiceTests.cs:line 29
+2024-03-15T09:01:05.0000000Z [Test]
+2024-03-15T09:01:05.1000000Z [Test]   Failed:     1, Passed:    41, Skipped:     0, Total:    42, Duration: 4s
+2024-03-15T09:01:05.2000000Z ##[error]dotnet test exited with code 1.
+2024-03-15T09:01:05.3000000Z [Gate] gate_decision: CHANGES_REQUIRED
+2024-03-15T09:01:05.4000000Z ##[endgroup]
+2024-03-15T09:01:05.5000000Z ##[error]Process completed with exit code 1.
