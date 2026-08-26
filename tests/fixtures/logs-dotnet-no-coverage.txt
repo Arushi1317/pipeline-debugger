@@ -1,0 +1,13 @@
+2024-03-15T09:01:10.0000000Z [Test] ============================================================
+2024-03-15T09:01:10.1000000Z [Test] Running dotnet test with coverage collection...
+2024-03-15T09:01:10.2000000Z [Test] Command: dotnet test QualityGate.Tests.csproj --results-directory status
+2024-03-15T09:01:21.3000000Z [Test] Passed!  - Failed:     0, Passed:    42, Skipped:     0, Total:    42, Duration: 11s
+2024-03-15T09:01:21.5000000Z [Test] Results File: C:\agent\work\1\s\status\TestResults.trx
+2024-03-15T09:01:22.0000000Z [Coverage] Checking for coverage output...
+2024-03-15T09:01:22.1000000Z [Coverage] Expected file: status\coverage.cobertura.xml
+2024-03-15T09:01:22.2000000Z [Coverage] coverage output was not generated for this run.
+2024-03-15T09:01:22.3000000Z [Coverage] coverage report not generated: the 'coverage.cobertura.xml' file is absent.
+2024-03-15T09:01:22.4000000Z ##[error]Coverage output not found — cannot compute coverage threshold.
+2024-03-15T09:01:22.5000000Z [Gate] gate_decision: CHANGES_REQUIRED
+2024-03-15T09:01:22.6000000Z ##[endgroup]
+2024-03-15T09:01:22.7000000Z ##[error]Process completed with exit code 1.
