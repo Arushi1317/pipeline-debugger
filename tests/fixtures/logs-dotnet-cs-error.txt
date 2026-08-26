@@ -1,0 +1,18 @@
+2024-03-15T09:00:35.5000000Z [Build] ============================================================
+2024-03-15T09:00:35.6000000Z [Build] Running MSBuild on QualityGate.sln...
+2024-03-15T09:00:35.7000000Z [Build] Microsoft (R) Build Engine version 17.8.3+195e7f5a3 for .NET
+2024-03-15T09:00:35.8000000Z [Build] Copyright (C) Microsoft Corporation. All rights reserved.
+2024-03-15T09:00:36.0000000Z [Build] Build started 15/03/2024 09:00:36.
+2024-03-15T09:00:36.5000000Z [Build] Restoring packages for QualityGate.Core.csproj...
+2024-03-15T09:00:37.2000000Z [Build] Restore succeeded.
+2024-03-15T09:00:37.8000000Z [Build] Compiling QualityGate.Core.csproj...
+2024-03-15T09:00:38.0000000Z [Build] MetricsCollector.cs(47,19): error CS0103: The name 'GateDecision' does not exist in the current context [QualityGate.Core.csproj]
+2024-03-15T09:00:38.1000000Z [Build] MetricsCollector.cs(61,25): error CS0103: The name 'GateDecision' does not exist in the current context [QualityGate.Core.csproj]
+2024-03-15T09:00:38.2000000Z [Build] QualityGateRunner.cs(89,31): error CS0103: The name 'GateDecision' does not exist in the current context [QualityGate.Runner.csproj]
+2024-03-15T09:00:38.4000000Z [Build]     3 Error(s)
+2024-03-15T09:00:38.5000000Z [Build]     0 Warning(s)
+2024-03-15T09:00:38.6000000Z [Build] Time Elapsed 00:00:02.98
+2024-03-15T09:00:38.7000000Z ##[error]MSBuild exited with code 1.
+2024-03-15T09:00:38.8000000Z [Gate] gate_decision: CHANGES_REQUIRED
+2024-03-15T09:00:38.9000000Z ##[endgroup]
+2024-03-15T09:00:39.0000000Z ##[error]Process completed with exit code 1.
