@@ -1,0 +1,11 @@
+2024-03-15T09:00:19.5000000Z [Build] ============================================================
+2024-03-15T09:00:19.6000000Z [Build] Running dotnet restore QualityGate.sln...
+2024-03-15T09:00:20.0000000Z [Build]   Determining projects to restore...
+2024-03-15T09:00:21.5000000Z [Build]   error NU1301: Unable to load the service index for source https://pkgs.dev.azure.com/myorg/_packaging/shared-feed/nuget/v3/index.json.
+2024-03-15T09:00:21.6000000Z [Build]   error NU1301: Response status code does not indicate success: 503 (Service Unavailable).
+2024-03-15T09:00:21.7000000Z [Build] Packages restore failed for QualityGate.Core.csproj.
+2024-03-15T09:00:21.8000000Z [Build] dotnet restore failed with exit code 1.
+2024-03-15T09:00:21.9000000Z ##[error]NuGet restore step failed. Cannot proceed to build.
+2024-03-15T09:00:22.0000000Z [Gate] gate_decision: CHANGES_REQUIRED
+2024-03-15T09:00:22.1000000Z ##[endgroup]
+2024-03-15T09:00:22.2000000Z ##[error]Process completed with exit code 1.
