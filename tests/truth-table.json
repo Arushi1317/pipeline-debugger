@@ -9,7 +9,8 @@
     "expectedPhase": "PIPELINE",
     "expectedConfidence": "HIGH",
     "shouldPostComment": true,
-    "fixShouldMention": "pandoc"
+    "fixShouldMention": "pandoc",
+    "expectedLanguage": "dotnet"
   },
   {
     "id": "tc-02",
@@ -21,7 +22,8 @@
     "expectedPhase": "PIPELINE",
     "expectedConfidence": "HIGH",
     "shouldPostComment": true,
-    "fixShouldMention": "pandoc"
+    "fixShouldMention": "pandoc",
+    "expectedLanguage": "dotnet"
   },
   {
     "id": "tc-03",
@@ -33,7 +35,8 @@
     "expectedPhase": "TEST",
     "expectedConfidence": "HIGH",
     "shouldPostComment": true,
-    "fixShouldMention": "dotnet test"
+    "fixShouldMention": "dotnet test",
+    "expectedLanguage": "dotnet"
   },
   {
     "id": "tc-04",
@@ -45,11 +48,12 @@
     "expectedPhase": "TEST",
     "expectedConfidence": "HIGH",
     "shouldPostComment": true,
-    "fixShouldMention": "dotnet test"
+    "fixShouldMention": "dotnet test",
+    "expectedLanguage": "dotnet"
   },
   {
     "id": "tc-05",
-    "name": "build error — MEDIUM confidence (build error + no test results both match)",
+    "name": "build error — MEDIUM confidence (build error + no test results + CS errors match)",
     "fixtureLog": "logs-build-error.txt",
     "changedFiles": [],
     "expectedSeverity": "BLOCKER",
@@ -57,7 +61,8 @@
     "expectedPhase": "BUILD",
     "expectedConfidence": "MEDIUM",
     "shouldPostComment": true,
-    "fixShouldMention": "MSBuild"
+    "fixShouldMention": "MSBuild",
+    "expectedLanguage": "dotnet"
   },
   {
     "id": "tc-06",
@@ -69,7 +74,8 @@
     "expectedPhase": "BUILD",
     "expectedConfidence": "MEDIUM",
     "shouldPostComment": true,
-    "fixShouldMention": "MSBuild"
+    "fixShouldMention": "MSBuild",
+    "expectedLanguage": "dotnet"
   },
   {
     "id": "tc-07",
@@ -81,7 +87,8 @@
     "expectedPhase": "BUILD",
     "expectedConfidence": "MEDIUM",
     "shouldPostComment": true,
-    "fixShouldMention": "MSBuild"
+    "fixShouldMention": "MSBuild",
+    "expectedLanguage": "dotnet"
   },
   {
     "id": "tc-08",
@@ -93,7 +100,8 @@
     "expectedPhase": "PIPELINE",
     "expectedConfidence": "HIGH",
     "shouldPostComment": true,
-    "fixShouldMention": "re-run"
+    "fixShouldMention": "re-run",
+    "expectedLanguage": "unknown"
   },
   {
     "id": "tc-09",
@@ -105,7 +113,8 @@
     "expectedPhase": "PIPELINE",
     "expectedConfidence": "HIGH",
     "shouldPostComment": true,
-    "fixShouldMention": "re-run"
+    "fixShouldMention": "re-run",
+    "expectedLanguage": "unknown"
   },
   {
     "id": "tc-10",
@@ -117,6 +126,202 @@
     "expectedPhase": null,
     "expectedConfidence": "NONE",
     "shouldPostComment": false,
-    "fixShouldMention": null
+    "fixShouldMention": null,
+    "expectedLanguage": "dotnet"
+  },
+  {
+    "id": "tc-11",
+    "name": ".NET CS compiler error — no changed files",
+    "fixtureLog": "logs-dotnet-cs-error.txt",
+    "changedFiles": [],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "build-error",
+    "expectedPhase": "BUILD",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "CS error",
+    "expectedLanguage": "dotnet"
+  },
+  {
+    "id": "tc-12",
+    "name": ".NET CS compiler error — csproj changed",
+    "fixtureLog": "logs-dotnet-cs-error.txt",
+    "changedFiles": ["src/QualityGate.Core/QualityGate.Core.csproj"],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "build-error",
+    "expectedPhase": "BUILD",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "CS error",
+    "expectedLanguage": "dotnet"
+  },
+  {
+    "id": "tc-13",
+    "name": ".NET NullReferenceException in test — no changed files",
+    "fixtureLog": "logs-dotnet-null-reference.txt",
+    "changedFiles": [],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "runtime-crash",
+    "expectedPhase": "TEST",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "NullReference",
+    "expectedLanguage": "dotnet"
+  },
+  {
+    "id": "tc-14",
+    "name": ".NET NullReferenceException in test — test code changed",
+    "fixtureLog": "logs-dotnet-null-reference.txt",
+    "changedFiles": ["tests/AnalysisServiceTests.cs"],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "runtime-crash",
+    "expectedPhase": "TEST",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "NullReference",
+    "expectedLanguage": "dotnet"
+  },
+  {
+    "id": "tc-15",
+    "name": ".NET NuGet restore failed — no changed files",
+    "fixtureLog": "logs-dotnet-nuget-restore.txt",
+    "changedFiles": [],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "dependency",
+    "expectedPhase": "BUILD",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "restore",
+    "expectedLanguage": "dotnet"
+  },
+  {
+    "id": "tc-16",
+    "name": ".NET NuGet restore failed — csproj changed",
+    "fixtureLog": "logs-dotnet-nuget-restore.txt",
+    "changedFiles": ["src/QualityGate.Core/QualityGate.Core.csproj"],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "dependency",
+    "expectedPhase": "BUILD",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "restore",
+    "expectedLanguage": "dotnet"
+  },
+  {
+    "id": "tc-17",
+    "name": ".NET coverage not generated — no changed files (MEDIUM pattern cap)",
+    "fixtureLog": "logs-dotnet-no-coverage.txt",
+    "changedFiles": [],
+    "expectedSeverity": "PIPELINE",
+    "expectedCategory": "evidence-missing",
+    "expectedPhase": "TEST",
+    "expectedConfidence": "MEDIUM",
+    "shouldPostComment": true,
+    "fixShouldMention": "coverage",
+    "expectedLanguage": "dotnet"
+  },
+  {
+    "id": "tc-18",
+    "name": ".NET coverage not generated — workflow changed",
+    "fixtureLog": "logs-dotnet-no-coverage.txt",
+    "changedFiles": [".github/workflows/company-quality-gate.yml"],
+    "expectedSeverity": "PIPELINE",
+    "expectedCategory": "evidence-missing",
+    "expectedPhase": "TEST",
+    "expectedConfidence": "MEDIUM",
+    "shouldPostComment": true,
+    "fixShouldMention": "coverage",
+    "expectedLanguage": "dotnet"
+  },
+  {
+    "id": "tc-19",
+    "name": ".NET SDK version not found — no changed files",
+    "fixtureLog": "logs-dotnet-sdk-missing.txt",
+    "changedFiles": [],
+    "expectedSeverity": "PIPELINE",
+    "expectedCategory": "tool-missing",
+    "expectedPhase": "PIPELINE",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "SDK",
+    "expectedLanguage": "dotnet"
+  },
+  {
+    "id": "tc-20",
+    "name": ".NET SDK version not found — workflow changed",
+    "fixtureLog": "logs-dotnet-sdk-missing.txt",
+    "changedFiles": [".github/workflows/company-quality-gate.yml"],
+    "expectedSeverity": "PIPELINE",
+    "expectedCategory": "tool-missing",
+    "expectedPhase": "PIPELINE",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "SDK",
+    "expectedLanguage": "dotnet"
+  },
+  {
+    "id": "tc-21",
+    "name": "Python ModuleNotFoundError — missing package",
+    "fixtureLog": "logs-python-module-missing.txt",
+    "changedFiles": [],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "dependency",
+    "expectedPhase": "BUILD",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "requirements.txt",
+    "expectedLanguage": "python"
+  },
+  {
+    "id": "tc-22",
+    "name": "Python AssertionError in pytest",
+    "fixtureLog": "logs-python-assertion.txt",
+    "changedFiles": [],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "test-failure",
+    "expectedPhase": "TEST",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "pytest",
+    "expectedLanguage": "python"
+  },
+  {
+    "id": "tc-23",
+    "name": "Python SyntaxError during collection",
+    "fixtureLog": "logs-python-syntax.txt",
+    "changedFiles": [],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "syntax-error",
+    "expectedPhase": "BUILD",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "syntax",
+    "expectedLanguage": "python"
+  },
+  {
+    "id": "tc-24",
+    "name": "Python pytest collected 0 items — no tests found",
+    "fixtureLog": "logs-python-no-tests.txt",
+    "changedFiles": [],
+    "expectedSeverity": "PIPELINE",
+    "expectedCategory": "evidence-missing",
+    "expectedPhase": "TEST",
+    "expectedConfidence": "HIGH",
+    "shouldPostComment": true,
+    "fixShouldMention": "test_*.py",
+    "expectedLanguage": "python"
+  },
+  {
+    "id": "tc-25",
+    "name": "Python TypeError in test (MEDIUM pattern cap)",
+    "fixtureLog": "logs-python-type-error.txt",
+    "changedFiles": [],
+    "expectedSeverity": "BLOCKER",
+    "expectedCategory": "runtime-crash",
+    "expectedPhase": "TEST",
+    "expectedConfidence": "MEDIUM",
+    "shouldPostComment": true,
+    "fixShouldMention": "TypeError",
+    "expectedLanguage": "python"
   }
 ]
